@@ -3,8 +3,6 @@ import customtkinter as ctk
 #app
 app = ctk.CTk()
 app.title("drawingtool")
-app.geometry("960x640")
-ctk.set_appearance_mode("light")
-
+app.geometry("480x200")
 
 app.mainloop()
