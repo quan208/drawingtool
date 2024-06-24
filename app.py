@@ -6,7 +6,7 @@ class DrawingTool(ctk.CTk):
         self.title("Drawing Tool 1.0")
         self.geometry("960x640")
         self._set_appearance_mode("light")     
-
+    
 
 if __name__ == "__main__":
     app = DrawingTool()
