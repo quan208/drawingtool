@@ -31,6 +31,7 @@ class DrawingTool(ctk.CTk):
             command=self.changebg,
         )
         self.bgbutton.pack(anchor="sw", padx=20)
+        self.drawcanvas()
 
     def changebg(self):
         curcolor = ctk.get_appearance_mode()
@@ -44,6 +45,11 @@ class DrawingTool(ctk.CTk):
         self.bgbutton.configure(image=newicon)
         self.text1.configure(text_color=newtcolor)
         ctk.set_appearance_mode(newcolor)
+
+    def drawcanvas(self):
+        self.canvas = ctk.CTkCanvas(self, width=800, height=500, bg="white")
+        self.canvas.pack(expand=True)
+
 
 
 if __name__ == "__main__":
