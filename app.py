@@ -24,16 +24,16 @@ class DrawingTool(ctk.CTk):
         self.bgbutton = ctk.CTkButton(
             self,
             text=None,
-            corner_radius=32,
+            corner_radius=8,
             width=32,
             height=32,
             fg_color="pink",
             hover_color="white",
-            image=ctk.CTkImage(dark_image=Image.open(dark_ico)),
+            image=ctk.CTkImage(dark_image=Image.open(light_ico)),
             command=self.changebg,
         )
-        self.bgbutton.pack(anchor="sw", padx=10, side="left")
-        # self.createButton()
+        self.bgbutton.pack(anchor="sw", padx=10, side="left", pady=2)
+        self.createButton()
         self.drawcanvas()
 
     def changebg(self):
@@ -42,7 +42,7 @@ class DrawingTool(ctk.CTk):
         newtcolor = "white" if self.text1._text_color == "black" else "black"
         newicon = (
             ctk.CTkImage(light_image=Image.open(light_ico))
-            if newcolor == "Light"
+            if newcolor == "Dark"
             else ctk.CTkImage(dark_image=Image.open(dark_ico))
         )
         newhovercolor = "#D3D3D3" if newtcolor == "black" else "#D1E4E4"
@@ -57,24 +57,24 @@ class DrawingTool(ctk.CTk):
 
     # Create buttons :
 
-    # def createButton(self):
-    #     button_frame = ctk.CTkFrame(self)
-    #     button_frame.place(anchor="n", relx=0.5, rely=0.01)
-    #     button_width = 35
-    #     button_height = 45
-    #     for idx, (text, command) in enumerate(bdt.button_data):
-    #         text.resize
-    #         button = ctk.CTkButton(
-    #             button_frame,
-    #             text=text,
-    #             command=command,
-    #             width=button_width,
-    #             height=button_height,
-    #             corner_radius=15,
-    #             hover_color="#A438BA",
-    #             fg_color="white",
-    #         )
-    #         button.pack()
+    def createButton(self):
+        button_frame = ctk.CTkFrame(self, fg_color="transparent")
+        button_frame.place(anchor="n", relx=0.5, rely=0.01)
+        button_width = 32
+        button_height = 32
+        for idx, (text, command) in enumerate(bdt.button_data):
+            button = ctk.CTkButton(
+                button_frame,
+                text=text,
+                command=command,
+                width=button_width,
+                height=button_height,
+                corner_radius=8,
+                hover_color="#A438BA",
+                fg_color="white",
+                bg_color="transparent",
+            )
+            button.pack(side=ctk.LEFT, padx=2)
 
 
 if __name__ == "__main__":
