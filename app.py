@@ -15,7 +15,7 @@ class DrawingTool(ctk.CTk):
         super().__init__()
         self.title("Drawing Tool 1.0")
         self.geometry("960x640")
-        self.font1 = ctk.CTkFont(family="JetBrains Mono", size=13)
+        self.font1 = ctk.CTkFont(family="JetBrains Mono", size=13, weight="bold")
         self.text1 = ctk.CTkLabel(
             self, font=self.font1, text=f"CurrentVer: {self.ver}", text_color="white"
         )
@@ -24,6 +24,8 @@ class DrawingTool(ctk.CTk):
             self,
             text=None,
             corner_radius=32,
+            width=32,
+            height=32,
             fg_color="pink",
             image=ctk.CTkImage(dark_image=Image.open(dark_ico)),
             command=self.changebg,
