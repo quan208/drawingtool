@@ -1,7 +1,10 @@
 # ***Changes :***
 
 - *Bg button fixed*
+- *weird ui zoom*
+- *open file ?*
 - *...*
+
 
 ## ***TO-DO :***
 
