@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from PIL import Image
+from PIL import Image, ImageTk
 import os
 import buttondata as bdt
 
@@ -7,6 +7,7 @@ import buttondata as bdt
 icon_dir = os.path.join("icon")
 light_ico = os.path.join(icon_dir, "sun.ico")
 dark_ico = os.path.join(icon_dir, "black.ico")
+# logo_path = os.path.join(icon_dir, "icon.ico")
 
 
 class DrawingTool(ctk.CTk):
@@ -16,19 +17,24 @@ class DrawingTool(ctk.CTk):
         super().__init__()
         self.title("Drawing Tool 1.0")
         self.geometry("960x640")
+        # self.iconpath = ImageTk.PhotoImage(file=logo_path)
         self.font1 = ctk.CTkFont(family="JetBrains Mono", size=13, weight="bold")
         self.text1 = ctk.CTkLabel(
             self, font=self.font1, text=f"CurrentVer: {self.ver}", text_color="white"
         )
-        self.text1.pack(anchor="sw", side="left")
+        self.text1.pack(anchor="sw", side="left", pady=2)
         self.bgbutton = ctk.CTkButton(
             self,
-            text=None,
+            text="Theme",
+            font=self.font1,
+            text_color="black",
             corner_radius=8,
             width=32,
             height=32,
             fg_color="pink",
             hover_color="white",
+            border_width=5,
+            border_color="white",
             image=ctk.CTkImage(dark_image=Image.open(light_ico)),
             command=self.changebg,
         )
@@ -46,8 +52,11 @@ class DrawingTool(ctk.CTk):
             else ctk.CTkImage(dark_image=Image.open(dark_ico))
         )
         newhovercolor = "#D3D3D3" if newtcolor == "black" else "#D1E4E4"
-        self.bgbutton.configure(image=newicon)
-        self.bgbutton.configure(hover_color=newhovercolor)
+        self.bgbutton.configure(
+            image=newicon,
+            hover_color=newhovercolor,
+            border_color=newtcolor,
+        )
         self.text1.configure(text_color=newtcolor)
         ctk.set_appearance_mode(newcolor)
 
@@ -56,7 +65,6 @@ class DrawingTool(ctk.CTk):
         self.canvas.place(relx=0.5, rely=0.5, anchor="center")
 
     # Create buttons :
-
     def createButton(self):
         button_frame = ctk.CTkFrame(self, fg_color="transparent")
         button_frame.place(anchor="n", relx=0.5, rely=0.01)
@@ -74,7 +82,7 @@ class DrawingTool(ctk.CTk):
                 fg_color="white",
                 bg_color="transparent",
             )
-            button.pack(side=ctk.LEFT, padx=2)
+            button.pack(side=ctk.LEFT, padx=2, pady=15)
 
 
 if __name__ == "__main__":

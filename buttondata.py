@@ -1,7 +1,9 @@
+import function as fn
+
 # Work list:
 button_data = [
     # icon, command:
-    ("", None),
+    ("", fn.sayhelo),
     ("", None),
     ("", None),
     ("", None),
