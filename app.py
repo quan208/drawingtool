@@ -12,6 +12,7 @@ dark_ico = os.path.join(icon_dir, "black.ico")
 
 class DrawingTool(ctk.CTk):
     ver = "1.0.0"
+    zoompercent = "100%"
 
     def __init__(self):
         super().__init__()
@@ -23,6 +24,15 @@ class DrawingTool(ctk.CTk):
             self, font=self.font1, text=f"CurrentVer: {self.ver}", text_color="white"
         )
         self.text1.pack(anchor="sw", side="left", pady=2)
+        self.zoom = ctk.CTkSlider(self)
+        self.zoom.pack(anchor="sw", side="right", padx=5, pady=5)
+        self.textzoom = ctk.CTkLabel(
+            self,
+            font=self.font1,
+            text=f"Zoom: {self.zoompercent}",
+            text_color="white",
+        )
+        self.textzoom.pack(anchor="sw", side="right")
         self.bgbutton = ctk.CTkButton(
             self,
             text="Theme",
@@ -41,6 +51,7 @@ class DrawingTool(ctk.CTk):
         self.bgbutton.pack(anchor="sw", padx=10, side="left", pady=2)
         self.createButton()
         self.drawcanvas()
+        self.saveUI()
 
     def changebg(self):
         curcolor = ctk.get_appearance_mode()
@@ -58,6 +69,7 @@ class DrawingTool(ctk.CTk):
             border_color=newtcolor,
         )
         self.text1.configure(text_color=newtcolor)
+        self.textzoom.configure(text_color=newtcolor)
         ctk.set_appearance_mode(newcolor)
 
     def drawcanvas(self):
@@ -83,6 +95,13 @@ class DrawingTool(ctk.CTk):
                 bg_color="transparent",
             )
             button.pack(side=ctk.LEFT, padx=2, pady=15)
+
+    def saveUI(self):
+        FileUi = ctk.CTkOptionMenu(
+            self,
+            corner_radius=8,
+        )
+        FileUi.place(anchor="nw", relx=0, rely=0)
 
 
 if __name__ == "__main__":
