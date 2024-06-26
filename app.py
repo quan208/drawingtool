@@ -50,7 +50,7 @@ class DrawingTool(ctk.CTk):
         )
         self.bgbutton.pack(anchor="sw", padx=10, side="left", pady=2)
         self.createButton()
-        self.drawcanvas()
+        self.drawcanvas(self.font1)
         self.saveUI()
 
     def changebg(self):
@@ -72,8 +72,16 @@ class DrawingTool(ctk.CTk):
         self.textzoom.configure(text_color=newtcolor)
         ctk.set_appearance_mode(newcolor)
 
-    def drawcanvas(self):
-        self.canvas = ctk.CTkCanvas(self, width=800, height=500, bg="white")
+    def drawcanvas(self, font1):
+        canvaswidth = 800
+        canvasheight = 500
+        self.sizecout = ctk.CTkLabel(
+            self, text=str(canvaswidth) + " x " + str(canvasheight) + "px", font=font1
+        )
+        self.sizecout.pack(anchor="sw", side=ctk.BOTTOM, padx=50)
+        self.canvas = ctk.CTkCanvas(
+            self, width=canvaswidth, height=canvasheight, bg="white", borderwidth=5
+        )
         self.canvas.place(relx=0.5, rely=0.5, anchor="center")
 
     # Create buttons :
@@ -97,10 +105,7 @@ class DrawingTool(ctk.CTk):
             button.pack(side=ctk.LEFT, padx=2, pady=15)
 
     def saveUI(self):
-        FileUi = ctk.CTkOptionMenu(
-            self,
-            corner_radius=8,
-        )
+        FileUi = ctk.CTkOptionMenu(self, corner_radius=8)
         FileUi.place(anchor="nw", relx=0, rely=0)
 
 
