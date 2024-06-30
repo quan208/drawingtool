@@ -12,7 +12,6 @@ dark_ico = os.path.join(icon_dir, "black.ico")
 
 class DrawingTool(ctk.CTk):
     ver = "1.0.0"
-    zoompercent = "100%"
 
     def __init__(self):
         super().__init__()
@@ -24,12 +23,12 @@ class DrawingTool(ctk.CTk):
             self, font=self.font1, text=f"CurrentVer: {self.ver}", text_color="white"
         )
         self.text1.pack(anchor="sw", side="left", pady=2)
-        self.zoom = ctk.CTkSlider(self)
+        self.zoom = ctk.CTkSlider(self, from_=50, to=175, command=self.updateZoom)
         self.zoom.pack(anchor="sw", side="right", padx=5, pady=5)
         self.textzoom = ctk.CTkLabel(
             self,
             font=self.font1,
-            text=f"Zoom: {self.zoompercent}",
+            text=f"Zoom: 100%",
             text_color="white",
         )
         self.textzoom.pack(anchor="sw", side="right")
@@ -73,16 +72,30 @@ class DrawingTool(ctk.CTk):
         ctk.set_appearance_mode(newcolor)
 
     def drawcanvas(self, font1):
-        canvaswidth = 800
-        canvasheight = 500
+        self.canvaswidth = 800
+        self.canvasheight = 500
         self.sizecout = ctk.CTkLabel(
-            self, text=str(canvaswidth) + " x " + str(canvasheight) + "px", font=font1
+            self,
+            text=str(self.canvaswidth) + " x " + str(self.canvasheight) + "px",
+            font=font1,
         )
         self.sizecout.pack(anchor="sw", side=ctk.BOTTOM, padx=50)
         self.canvas = ctk.CTkCanvas(
-            self, width=canvaswidth, height=canvasheight, bg="white", borderwidth=5
+            self,
+            width=self.canvaswidth,
+            height=self.canvasheight,
+            bg="white",
+            borderwidth=5,
         )
         self.canvas.place(relx=0.5, rely=0.5, anchor="center")
+
+    def updateZoom(self, value):
+        zoom_factor = int(value) / 100
+        new_width = int(self.canvaswidth * zoom_factor)
+        new_height = int(self.canvasheight * zoom_factor)
+        self.canvas.configure(width=new_width, height=new_height)
+        self.sizecout.configure(text=f"{new_width} x {new_height}px")
+        self.textzoom.configure(text=f"Zoom: {int(value)}%")
 
     # Create buttons :
     def createButton(self):
